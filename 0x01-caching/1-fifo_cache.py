@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
-'''1-fifo_cache'''
-
+"""ALX SE caching module"""
 BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    '''Implements FIFO cache algorithm'''
-
+    """A caching system"""
     def __init__(self):
-        '''Inherits methods and
-        properties from parent class'''
+        """Initialize the class"""
+        self.keys = []
         super().__init__()
 
     def put(self, key, item):
-        '''Sets a new item in cache_data dict'''
+        """Add an item in a cache"""
         if key is None or item is None:
             return
-
         self.cache_data[key] = item
+        self.keys.append(key)
+        if len(self.keys) != len(self.cache_data):
+            self.keys.pop()
 
-        if len(self.cache_data) > self.MAX_ITEMS:
-            first_key = next(iter(self.cache_data))
-            self.cache_data.pop(first_key)
-            print(f"DISCARD {first_key}")
+        if len(self.cache_data) > super().MAX_ITEMS:
+            print(f"DISCARD: {self.keys[0]}")
+            del self.cache_data[self.keys[0]]
+            self.keys.pop(0)
 
     def get(self, key):
-        '''Retrieves item from cache_data dict'''
-        try:
-            return self.cache_data[key]
-        except KeyError:
+        """Get an item by key"""
+        if key is None or self.cache_data.get(key) is None:
             return None
+        return self.cache_data[key]
