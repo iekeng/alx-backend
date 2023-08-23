@@ -3,9 +3,11 @@
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+
 class LRUCache(BaseCaching):
     '''Implements the Least Recently Used
     cache replacement policy'''
+
     def __init__(self):
         super().__init__()
         self.tracker = []
@@ -16,10 +18,10 @@ class LRUCache(BaseCaching):
             return
 
         elif len(self.cache_data) >= self.MAX_ITEMS\
-                    and key not in self.cache_data:
-                print(f'DISCARD: {self.tracker[0]}')  
-                self.cache_data.pop(self.tracker[0])
-                self.tracker.pop(0)
+                and key not in self.cache_data:
+            print(f'DISCARD: {self.tracker[0]}')
+            self.cache_data.pop(self.tracker[0])
+            self.tracker.pop(0)
 
         elif key in self.tracker:
             self.cache_data[key] = item
@@ -27,7 +29,6 @@ class LRUCache(BaseCaching):
 
         self.tracker.append(key)
         self.cache_data[key] = item
-
 
     def get(self, key):
         '''Retrieves cache_data dict'''
