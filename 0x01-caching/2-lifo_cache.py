@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 '''2-lifo_cache'''
 
-BaseCaching=__import__('base_caching').BaseCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LIFOCache(BaseCaching):
     '''implements LIFO cache replacement policy'''
+
     def __init__(self):
         '''inherits from the super class'''
         super().__init__()
@@ -15,7 +16,8 @@ class LIFOCache(BaseCaching):
         if key is None or item is None:
             return
 
-        elif len(self.cache_data) >= self.MAX_ITEMS and key not in self.cache_data:
+        elif len(self.cache_data) >= self.MAX_ITEMS \
+                and key not in self.cache_data:
             newest_key = list(self.cache_data)[-1]
             self.cache_data.pop(newest_key)
             print(f'DISCARD: {newest_key}')
