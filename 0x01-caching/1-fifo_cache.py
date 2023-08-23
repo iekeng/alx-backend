@@ -16,11 +16,14 @@ class FIFOCache(BaseCaching):
         '''Sets a new item in cache_data dict'''
         if key is None or item is None:
             return
-        self.cache_data[key] = item
-        if len(self.cache_data) > self.MAX_ITEMS:
-            wanted_key = list(self.cache_data)[0]
-            self.cache_data.pop(wanted_key)
-            print(f"DISCARD {wanted_key}")
+
+        self.cache_data[key] = item 
+
+        while len(self.cache_data) > self.MAX_ITEMS:
+            first_key = list(self.cache_data)[0]
+            self.cache_data.pop(first_key)
+            print(f"DISCARD {first_key}")
+            break
 
     def get(self, key):
         '''Retrieves item from cache_data dict'''
