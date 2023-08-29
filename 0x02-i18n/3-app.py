@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
 
-class Config(object):
+class Config:
     '''Flask app config contained in Config class'''
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
@@ -17,13 +17,13 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     '''Get best language match using the accept_langages header'''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
-def index():
+def index() -> str:
     '''View for the home route'''
     home_title = gettext('home_title')
     home_header = gettext('home_header')
