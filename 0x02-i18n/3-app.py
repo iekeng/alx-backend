@@ -29,7 +29,7 @@ def get_locale():
 
 
 @app.route('/', strict_slashes=False)
-def index():
+def index() -> str:
     """
     Handles / route
     """
