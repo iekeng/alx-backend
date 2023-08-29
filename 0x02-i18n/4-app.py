@@ -31,4 +31,4 @@ def index() -> str:
     '''View for the home route'''
     home_title: str = gettext('home_title')
     home_header: str = gettext('home_header')
-    return render_template('4-index.html')
+    return render_template('3-index.html')
