@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-'''3-app'''
+'''4-app'''
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
+from typing import Union, List
 
 
 class Config:
@@ -17,7 +18,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> Union[List, str]:
     '''Get best language match using the accept_langages header'''
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -26,7 +27,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     '''View for the home route'''
     home_title = gettext('home_title')
     home_header = gettext('home_header')
