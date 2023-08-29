@@ -18,9 +18,9 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> Union[List, str]:
+def get_locale() -> str:
     '''Get best language match using the accept_langages header'''
-    locale = request.args.get('locale')
+    locale: str = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -29,6 +29,6 @@ def get_locale() -> Union[List, str]:
 @app.route('/')
 def index() -> str:
     '''View for the home route'''
-    home_title = gettext('home_title')
-    home_header = gettext('home_header')
+    home_title: str = gettext('home_title')
+    home_header: str = gettext('home_header')
     return render_template('4-index.html')
