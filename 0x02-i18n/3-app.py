@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 '''3-app'''
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
-from typing import List
+from flask_babel import Babel
 
 
 class Config:
     '''Flask app config contained in Config class'''
-    LANGUAGES: List = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE: str = "en"
-    BABEL_DEFAULT_TIMEZONE: str = "UTC"
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
@@ -26,7 +25,4 @@ def get_locale() -> str:
 @app.route('/')
 def index() -> str:
     '''View for the home route'''
-    home_title: str = gettext('home_title')
-    home_header: str = gettext('home_header')
-
     return render_template('3-index.html')
