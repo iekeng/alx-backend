@@ -13,6 +13,7 @@
     {% else %}
     <p>{{ gettext('not_logged_in') }}</p>
     {% endif %}
+    <p>{{ gettext('current_time_is', current_time=g.time) }}</p>
 
   </body>
 </html>
