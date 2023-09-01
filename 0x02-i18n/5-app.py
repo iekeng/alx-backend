@@ -37,7 +37,6 @@ def get_user() -> List:
     '''Retrieves requested user'''
     user_id = request.args.get('login_as', None)
 
-
     if user_id and in users.keys():
         id = int(user_id)
         return users[id]
@@ -55,4 +54,3 @@ def before_request():
 def index() -> str:
     '''View for the home route'''
     return render_template('5-index.html')
-
