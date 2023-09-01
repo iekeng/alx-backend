@@ -33,13 +33,14 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user() -> List:
+def get_user():
     '''Retrieves requested user'''
     user_id = request.args.get('login_as', None)
-    id = int(user_id)
-
-    if id is not None and id in users.keys():
-        return users[id]
+    
+    if user_id:
+        id = int(user_id)
+        if id in users.keys():
+            return users[id]
     return None
 
 
