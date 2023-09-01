@@ -36,7 +36,7 @@ def get_locale() -> str:
 def get_user():
     '''Retrieves requested user'''
     user_id = request.args.get('login_as', None)
-    
+
     if user_id:
         id = int(user_id)
         if id in users.keys():
