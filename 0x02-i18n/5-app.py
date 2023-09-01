@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
-'''4-app'''
-from flask import ( 
-    Flask, 
-    render_template, 
-    request
-)
-from flask_babel import (
-    Babel, 
-    gettext
-)
+'''5-app'''
+from flask import Flask, g, request, render_template
+from flask_babel import Babel
+from typing import List
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -16,6 +10,7 @@ users = {
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
+
 
 class Config:
     '''Flask app config contained in Config class'''
@@ -38,13 +33,22 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+def get_user() -> List:
+    user_id = request.args.get('login_as', None)
+
+    if user_id:
+        id = int(user_id)
+        return users[id]
+    return None
+
+
+@app.before_request
+def before_request():
+    user = get_user()
+    g.user = user
+
+
 @app.route('/')
 def index() -> str:
     '''View for the home route'''
-    home_title: str = gettext('home_title')
-    home_header: str = gettext('home_header')
-    return render_template('3-index.html')
-
-@app.before_request
-@app
-def get_user():
+    return render_template('5-index.html')
