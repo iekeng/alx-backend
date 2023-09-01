@@ -27,7 +27,7 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale() -> str:
     '''Get best language match using the accept_langages header'''
-    locale: str = request.args.get('locale')
+    locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -37,7 +37,8 @@ def get_user() -> List:
     '''Retrieves requested user'''
     user_id = request.args.get('login_as', None)
 
-    if user_id:
+
+    if user_id and in users.keys():
         id = int(user_id)
         return users[id]
     return None
@@ -55,6 +56,3 @@ def index() -> str:
     '''View for the home route'''
     return render_template('5-index.html')
 
-
-if __name__ == "__main__":
-    app.run(port="5000", host="0.0.0.0", debug=True)
