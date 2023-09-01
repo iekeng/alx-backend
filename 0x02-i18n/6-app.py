@@ -47,7 +47,8 @@ def get_user():
     if user_id:
         id = int(user_id)
         if id in users.keys():
-            return users[id] return None
+            return users[id]
+    return None
 
 
 @app.before_request
