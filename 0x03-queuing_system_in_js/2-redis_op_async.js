@@ -1,4 +1,4 @@
-import {createClient, print} from 'redis';
+import { createClient, print } from 'redis';
 
 const client = createClient();
 
@@ -14,8 +14,8 @@ function setNewSchool(schoolName, value) {
   client.set(schoolName, value, print);
 }
 
-function displaySchoolValue(schoolName) {
-  client.get(schoolName, (err, value) => {
+async function displaySchoolValue(schoolName) {
+  await client.get(schoolName, (err, value) => {
     if (err){
       console.error(err.message)
     } else {
